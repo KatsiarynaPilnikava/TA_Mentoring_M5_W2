@@ -45,25 +45,11 @@ public class BasicTest {
 		user2 = new User("pilnikava_2", "2UserPassword");
 	}
 
-//	@BeforeTest
-//	@Parameters({ "grid_url", "url", "browser" })
-//	public void initStartPage(String grid_url, String url, String browser) {
-//		System.out.println(String.format("Initializing %s browser driver", browser));
-//        if ("".equals(grid_url)) {
-//            driver = WebDriverFactory.getWebDriver(browser);
-//        } else {
-//            driver = WebDriverFactory.getWebDriver(grid_url, CapabilitiesFactory.getDesiredCapabilities(browser));
-//        }
-//        driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
-//        System.out.println(String.format("Browser driver for  %s browser was successfully initialized", browser));
-//        driver.get(url);
-//
-//	}
 	
 	@BeforeTest
 	@Parameters({ "config", "property"})
 	public void initStartPage(String config, String property) throws IOException {
-		//XMLReader.convertToXML();
+		XMLReader.convertToXML();
 		ConfigReader reader = ConfigReader.getInstance();
 		String configType = reader.getPropValues(config, property);
 		Assert.assertNotNull(configType);
@@ -71,10 +57,10 @@ public class BasicTest {
 		Assert.assertNotNull("Wrong source type",source);
 		ConfigData data = source.getReader().read();
 		System.out.println(String.format("Initializing %s browser driver", data.getBrowser()));
-        if ("".equals(data.getGrid_url())) {
+        if ("".equals(data.getGridUrl())) {
             driver = WebDriverFactory.getWebDriver(data.getBrowser());
         } else {
-            driver = WebDriverFactory.getWebDriver(data.getGrid_url(), CapabilitiesFactory.getDesiredCapabilities(data.getBrowser()));
+            driver = WebDriverFactory.getWebDriver(data.getGridUrl(), CapabilitiesFactory.getDesiredCapabilities(data.getBrowser()));
         }
         driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         System.out.println(String.format("Browser driver for  %s browser was successfully initialized", data.getBrowser()));

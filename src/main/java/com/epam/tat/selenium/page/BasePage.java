@@ -20,7 +20,7 @@ public class BasePage {
     private static final String SENT_XPATH = "//a[@href=\'/messages/sent/\']";
     private static final String LOGOUT_LINK_ID = "PH_logoutLink";
     private static final String BODY = "//body";
-    private static final String GET_PAGE_TITLE_SCRIPT = "return document.title;";
+    
     
     @FindBy(xpath = BODY)
     private WebElement page;
@@ -33,12 +33,12 @@ public class BasePage {
     @FindBy(id = LOGOUT_LINK_ID)
     private WebElement logoutButton;
     public static WebDriver driver;
-    protected static JavascriptExecutor js;
+    public static JavascriptExecutor js;
 
     public BasePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
-        System.out.println(String.format("Navigated to \"%s\" page", JSUtil.getTitle(GET_PAGE_TITLE_SCRIPT)));
+    	BasePage.driver = driver;
+        PageFactory.initElements(BasePage.driver, this);
+        System.out.println(String.format("Navigated to \"%s\" page", JSUtil.getTitle(driver)));
     }
 
 
@@ -75,7 +75,7 @@ public class BasePage {
     public void mouseClick(WebElement element){
     	Actions action = new Actions(driver);
     	action.moveToElement(element).click().build().perform();
-    	JSUtil.waitForPage();
+    	JSUtil.waitForPage(driver);
     	
     }
     

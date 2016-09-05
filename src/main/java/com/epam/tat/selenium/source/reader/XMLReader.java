@@ -11,10 +11,6 @@ import com.epam.tat.selenium.entities.ConfigData;
 
 public class XMLReader implements Reader {
 
-	private static String driverProp = null;
-	
-
-
 	public static void convertToXML() {
 		ConfigData data = new ConfigData("google_chrome", "http://localhost:4444/wd/hub", "https://mail.ru/");
 		try {

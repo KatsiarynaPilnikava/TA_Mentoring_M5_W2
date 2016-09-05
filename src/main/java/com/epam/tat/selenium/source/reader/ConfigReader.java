@@ -12,6 +12,9 @@ public class ConfigReader {
 	public static ConfigReader getInstance() {
 		return INSTANCE;
 	}
+	private ConfigReader(){
+		
+	}
 	
 	public String getPropValues(String propFileName, String property) throws IOException {
 		InputStream inputStream = null;

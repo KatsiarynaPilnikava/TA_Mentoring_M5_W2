@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ConfigData {
 	private String browser;
-	private String grid_url;
+	private String gridUrl;
 	private String url;
 
 	public String getBrowser() {
@@ -16,12 +16,12 @@ public class ConfigData {
 		this.browser = browser;
 	}
 
-	public String getGrid_url() {
-		return grid_url;
+	public String getGridUrl() {
+		return gridUrl;
 	}
 
 	public void setGrid_url(String grid_url) {
-		this.grid_url = grid_url;
+		this.gridUrl = grid_url;
 	}
 
 	public String getUrl() {
@@ -35,7 +35,7 @@ public class ConfigData {
 	public ConfigData(String browser, String grid_url, String url) {
 		super();
 		this.browser = browser;
-		this.grid_url = grid_url;
+		this.gridUrl = grid_url;
 		this.url = url;
 	}
 	public ConfigData(){
@@ -44,7 +44,7 @@ public class ConfigData {
 
 	@Override
 	public String toString() {
-		return "ConfigData [browser=" + browser + ", grid_url=" + grid_url
+		return "ConfigData [browser=" + browser + ", grid_url=" + gridUrl
 				+ ", url=" + url + "]";
 	}
 
@@ -54,7 +54,7 @@ public class ConfigData {
 		int result = 1;
 		result = prime * result + ((browser == null) ? 0 : browser.hashCode());
 		result = prime * result
-				+ ((grid_url == null) ? 0 : grid_url.hashCode());
+				+ ((gridUrl == null) ? 0 : gridUrl.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
 		return result;
 	}
@@ -73,10 +73,10 @@ public class ConfigData {
 				return false;
 		} else if (!browser.equals(other.browser))
 			return false;
-		if (grid_url == null) {
-			if (other.grid_url != null)
+		if (gridUrl == null) {
+			if (other.gridUrl != null)
 				return false;
-		} else if (!grid_url.equals(other.grid_url))
+		} else if (!gridUrl.equals(other.gridUrl))
 			return false;
 		if (url == null) {
 			if (other.url != null)

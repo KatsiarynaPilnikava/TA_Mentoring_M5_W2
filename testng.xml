@@ -4,7 +4,7 @@
 <suite name="Selenium tests suite">
     <test name="E-Mail testing">
      <parameter name="config" value="prop.properties"/>
-     <parameter name="property" value="config.file"/>
+     <parameter name="property" value="config.type"/>
                <classes>
             <class name="com.epam.tat.selenium.tests.MailTest"/>
         </classes>

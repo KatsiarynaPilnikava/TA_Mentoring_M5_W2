@@ -1,18 +1,16 @@
 package com.epam.tat.selenium.tests;
 
 
-import com.epam.tat.selenium.page.*;
-import com.epam.tat.selenium.steps.Step;
-import com.epam.tat.selenium.util.JSUtil;
-
-import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.epam.tat.selenium.page.LoginPage;
+import com.epam.tat.selenium.steps.Step;
+import com.epam.tat.selenium.util.JSUtil;
+
 public class MailTest extends BasicTest {
 
-    private static final String MAIL_TITLE_XPATH = "//a[@title=\"";
+    //private static final String MAIL_TITLE_XPATH = "//a[@title=\"";
     private String subject;
     private String text;
 
@@ -31,7 +29,8 @@ public class MailTest extends BasicTest {
     @Test(description = "compose email to be send to user2, subject and text fields should be generated automaticly", dependsOnGroups = "login test")
     public void composeMailTest() {
     	System.out.println("Attempting to open new window.");
-        Step.composeMail(user2);
+    	Step step = new Step(driver);
+    	step.composeMail(user2);
         Assert.assertTrue(composeMailPage.checkMailContent(text), "Wrong mail body or recipient");
     }
 
@@ -42,7 +41,7 @@ public class MailTest extends BasicTest {
         System.out.println("New mail saved as draft");
     	System.out.println("Attempting to open draft folder...");
     	draftsPage = composeMailPage.goToDraft();
-    	JSUtil.waitForPage();
+    	JSUtil.waitForPage(driver);
         handleAlert();
         Assert.assertTrue(draftsPage.checkIfMailSaved(user2.getUsername() + "@mail.ru"), "Drafts folder is empty");
         System.out.println("There is saved mail in draft folder");
@@ -51,7 +50,7 @@ public class MailTest extends BasicTest {
     @Test(description = "open previously saved mail and check if content was saved properly", dependsOnMethods = "checkDraftExists")
     public void checkDraftContentTest() {
     	composeMailPage =  draftsPage.openSavedMail();
-    	JSUtil.waitForPage();
+    	JSUtil.waitForPage(driver);
         Assert.assertTrue(composeMailPage.checkMailContent(user2.getUsername() + "@mail.ru", subject, text), "Not all elements were found successfully.");
     }
 
@@ -62,7 +61,7 @@ public class MailTest extends BasicTest {
         composeMailPage.sendMail();
         System.out.println("Open sent folder");
         sentPage = basePage.goToSent();
-        JSUtil.waitForPage();
+        JSUtil.waitForPage(driver);
         System.out.println("Check sent mail folder");
         Assert.assertTrue(sentPage.checkIfMailSaved(user2 + "@mail.ru"), "Sent folder is empty");
     }
@@ -71,7 +70,7 @@ public class MailTest extends BasicTest {
     public void checkEmailNotAtDrafts() {
         System.out.println("Opening drafts folder.");
         draftsPage = sentPage.goToDraft();
-        JSUtil.waitForPage();
+        JSUtil.waitForPage(driver);
         System.out.println("Check if mail disappeared from drafts folder");
         Assert.assertFalse(draftsPage.checkIfMailSaved(user2.getUsername() + "@mail.ru"), "Drafts folder is not empty");
     }
